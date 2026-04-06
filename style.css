@@ -1,0 +1,456 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #ffffff;
+    min-height: 100vh;
+}
+
+.container {
+    width: 100%;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.main-title {
+    color: #0047A0;
+    font-size: 3.5rem;
+    font-weight: 400;
+    text-align: center;
+    margin-bottom: 5px;
+}
+
+.sub-title {
+    color: #000000;
+    font-size: 1.6rem;
+    font-weight: 400;
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.view-section {
+    width: 100%;
+    max-width: 950px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    animation: fadeIn 0.4s ease forwards;
+}
+
+.view-section.no-center {
+    align-items: flex-start;
+}
+
+.hidden {
+    display: none !important;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ЭКРАН 1: Таблица */
+.table-container {
+    width: 100%;
+}
+
+.table-header {
+    display: flex;
+    padding: 0 10px;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.header-cell {
+    flex: 1;
+}
+
+.header-cell:nth-child(2) {
+    flex: 1.5;
+}
+
+.table-row {
+    display: flex;
+    align-items: center;
+    background-color: #E2E8F4;
+    font-size: 1.3rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.table-row.bg-white {
+    background-color: #FFFFFF;
+}
+
+.table-row:hover {
+    background-color: #92ACDC !important;
+}
+
+.cell {
+    padding: 12px 15px;
+    border-right: 4px solid #ffffff;
+}
+
+.cell:last-child {
+    border-right: none;
+}
+
+.cell:nth-child(1) {
+    flex: 1;
+}
+
+.cell:nth-child(2) {
+    flex: 1.5;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.cell:nth-child(3) {
+    flex: 1;
+}
+
+.progress-bar {
+    width: 140px;
+    height: 22px;
+    border: 1px solid #555;
+    border-radius: 15px;
+    background-color: #ffffff;
+}
+
+.progress-fill {
+    height: 100%;
+    background-color: #003D8E;
+    border-radius: 12px;
+}
+
+.status-panel-wrapper {
+    width: 100%;
+    margin-top: 25px;
+    position: relative;
+    opacity: 0;
+    visibility: hidden;
+    transition: 0.3s;
+}
+
+.status-panel-wrapper.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.status-panel {
+    background-color: #4A74C4;
+    color: white;
+    text-align: center;
+    padding: 50px;
+    font-size: 1.4rem;
+}
+
+/* ЭКРАН 2: Кнопки */
+.buttons-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 25px 40px;
+    width: 100%;
+}
+
+.dir-btn {
+    background-color: #E65C00;
+    color: white;
+    border: none;
+    border-radius: 40px;
+    padding: 22px;
+    font-size: 1.25rem;
+    cursor: pointer;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+    transition: 0.2s;
+}
+
+.dir-btn:hover {
+    background-color: #F08A00;
+}
+
+/* ЭКРАН 3: Детализация */
+.tabs-nav {
+    display: flex;
+    width: 100%;
+    background-color: #F08A00;
+}
+
+.tab {
+    flex: 1;
+    padding: 15px;
+    text-align: center;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    border-right: 1px solid #fff;
+}
+
+.tab.active {
+    background-color: #E65C00;
+}
+
+.badge {
+    background-color: #B51A1A;
+    border-radius: 50%;
+    padding: 2px 8px;
+    font-size: 0.9rem;
+    margin-left: 5px;
+}
+
+.tab-content {
+    width: 100%;
+}
+
+.details-content {
+    width: 100%;
+    padding: 30px 0;
+}
+
+.details-title {
+    color: #0047A0;
+    font-size: 2.2rem;
+    margin-bottom: 30px;
+}
+
+.info-table {
+    width: 70%;
+    border-collapse: collapse;
+    margin-bottom: 40px;
+}
+
+.info-table th {
+    background-color: #0047A0;
+    color: white;
+    text-align: left;
+    padding: 12px;
+}
+
+.info-table td {
+    background-color: #E2E8F4;
+    padding: 10px 12px;
+    border: 2px solid #fff;
+    font-weight: 500;
+}
+
+.specialists-header {
+    background-color: #E65C00;
+    color: white;
+    width: 100%;
+    padding: 10px;
+    text-align: center;
+    border-radius: 20px;
+    font-weight: 600;
+    margin-bottom: 25px;
+}
+
+.specialists-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    width: 100%;
+}
+
+.spec-card {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.spec-icon {
+    font-size: 2.5rem;
+    color: #0047A0;
+}
+
+.spec-contacts {
+    display: flex;
+    gap: 15px;
+    color: #0047A0;
+    font-size: 1.5rem;
+}
+
+/* НОВЫЙ СТИЛЬ: Вкладка Документы */
+.docs-sub-nav {
+    display: flex;
+    width: 100%;
+    background-color: #E2E8F4;
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+.sub-tab {
+    flex: 1;
+    padding: 12px 10px;
+    text-align: center;
+    color: #333;
+    cursor: pointer;
+}
+
+.sub-tab.active {
+    background-color: #ffffff;
+}
+
+/* Белая карточка с закруглениями для таблицы документов */
+.docs-card {
+    background-color: #ffffff;
+    border-radius: 40px;
+    padding: 30px 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    margin-top: 10px;
+    width: 100%;
+}
+
+.docs-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.docs-table th {
+    text-align: left;
+    padding: 10px;
+    color: #777;
+    font-weight: 400;
+    font-size: 1.1rem;
+}
+
+.docs-table td {
+    padding: 12px 10px;
+    font-weight: 500;
+    font-size: 1.1rem;
+}
+
+/* Чередование цветов строк в документах */
+.docs-table tr.bg-blue td {
+    background-color: #B8CDEE;
+}
+
+.docs-table tr.bg-white td {
+    background-color: #ffffff;
+}
+
+.file-type {
+    font-weight: 700 !important;
+    color: #333;
+}
+
+/* Иконки папок разных цветов */
+.folder-icon {
+    font-size: 1.5rem;
+}
+
+.icon-red {
+    color: #D32F2F;
+}
+
+.icon-green {
+    color: #388E3C;
+}
+
+.icon-orange {
+    color: #F57C00;
+}
+
+.icon-blue {
+    color: #1976D2;
+}
+
+.back-link {
+    margin-top: 30px;
+    cursor: pointer;
+    color: #0047A0;
+    background: none;
+    border: none;
+    text-decoration: underline;
+}
+
+/* ЭКРАН 3: Вкладка Последние изменения */
+.changes-layout {
+    display: flex;
+    gap: 25px;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.changes-list {
+    flex: 1.2; /* Делает левую часть чуть шире правой */
+    display: flex;
+    flex-direction: column;
+}
+
+.changes-row {
+    display: flex;
+    font-size: 1.1rem;
+    font-weight: 500;
+    min-height: 85px; /* Чтобы строки были высокими, как на скриншоте */
+}
+
+.changes-dept {
+    flex: 1;
+    padding: 15px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    border-right: 4px solid #ffffff;
+    border-bottom: 4px solid #ffffff;
+}
+
+.changes-desc {
+    flex: 1.5;
+    padding: 15px 20px;
+    display: flex;
+    align-items: center;
+    border-bottom: 4px solid #ffffff;
+}
+
+/* Цвета строк в соответствии со скрином */
+.bg-light-blue {
+    background-color: #B8CDEE;
+}
+
+.bg-light-grey {
+    background-color: #DCDCDC;
+}
+
+.changes-row.bg-white .changes-dept,
+.changes-row.bg-white .changes-desc {
+    background-color: #ffffff;
+    border: 1px solid #E2E8F4;
+}
+
+.changes-row.bg-white .changes-dept {
+    border-right: 4px solid #ffffff; /* Сохраняем белый разделитель */
+}
+
+/* Контейнер для картинки справа */
+.changes-chart-container {
+    flex: 1;
+    background-color: #ffffff;
+    border: 1px solid #E2E8F4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+    min-height: 340px; /* Выравнивает высоту по блокам слева */
+}
+
+.changes-chart-img {
+    max-width: 100%;
+    height: auto;
+    object-fit: contain;
+}
