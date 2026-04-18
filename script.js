@@ -1,53 +1,77 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const title = document.getElementById('title');
-    const rows = document.querySelectorAll('.table-row');
-    const statusPanel = document.getElementById('statusPanel');
-    
-    const tableView = document.getElementById('tableView');
-    const directionView = document.getElementById('directionView');
-    const detailsView = document.getElementById('detailsView');
-    
-    const costBtn = document.getElementById('costManagementBtn');
-    
-    const tabs = document.querySelectorAll('.tabs-nav .tab');
-    const tabContents = document.querySelectorAll('.tab-content');
+// Функция для перехода с главного экрана на экран проекта
+function openProject() {
+    document.getElementById('home-view').classList.add('hidden');
+    document.getElementById('project-view').classList.remove('hidden');
+}
 
-    rows.forEach(row => {
-        row.addEventListener('mouseenter', () => statusPanel.classList.add('active'));
-        row.addEventListener('mouseleave', () => statusPanel.classList.remove('active'));
-        
-        row.addEventListener('click', () => {
-            tableView.classList.add('hidden');
-            directionView.classList.remove('hidden');
-            window.scrollTo(0,0);
+// Функция для возврата к выбору проектов
+function backToProjects() {
+    document.getElementById('project-view').classList.add('hidden');
+    document.getElementById('home-view').classList.remove('hidden');
+}
+
+// Функция для переключения главных вкладок внутри проекта (верхнее оранжевое меню)
+function switchTab(tabId, element) {
+    // Убираем активный класс у всех главных кнопок меню
+    const navItems = document.querySelectorAll('.nav-item');
+    navItems.forEach(item => item.classList.remove('active'));
+
+    // Добавляем класс нажатой кнопке
+    element.classList.add('active');
+
+    // Скрываем все главные вкладки
+    const tabs = document.querySelectorAll('.tab-content');
+    tabs.forEach(tab => tab.classList.add('hidden'));
+
+    // Показываем выбранную вкладку
+    document.getElementById('tab-' + tabId).classList.remove('hidden');
+}
+
+// Функция для переключения подменю (серое меню во вкладке Экономика)
+function switchSubTab(subTabId, element) {
+    // Убираем активный класс у всех кнопок подменю
+    const subNavItems = document.querySelectorAll('.submenu-item');
+    subNavItems.forEach(item => item.classList.remove('active'));
+
+    // Добавляем класс нажатой кнопке
+    element.classList.add('active');
+
+    // Скрываем все контенты подменю
+    const subTabs = document.querySelectorAll('.sub-content');
+    subTabs.forEach(tab => tab.classList.add('hidden'));
+
+    // Показываем выбранный контент подменю
+    document.getElementById('sub-' + subTabId).classList.remove('hidden');
+}
+
+// Этот код сработает после загрузки всей страницы
+document.addEventListener("DOMContentLoaded", () => {
+    const modal = document.getElementById("image-modal");
+    const modalImg = document.getElementById("modal-img");
+
+    // Ищем все теги img на странице
+    const images = document.querySelectorAll("img");
+
+    images.forEach(img => {
+        // Исключаем саму картинку внутри модалки, чтобы не зациклить
+        if (img.id === "modal-img") return;
+
+        // По клику на любую картинку показываем модалку
+        img.addEventListener("click", function() {
+            modal.classList.remove("hidden");
+            modalImg.src = this.src; // Копируем путь нажатой картинки в модалку
         });
     });
 
-    // 2. Переход к экрану "Управление стоимостью"
-    costBtn.addEventListener('click', () => {
-        title.classList.add('hidden');
-        directionView.classList.add('hidden');
-        detailsView.classList.remove('hidden');
-        window.scrollTo(0,0);
-    });
-
-    // 3. Логика переключения Табов (Общая информация / Документы)
-    tabs.forEach(tab => {
-        tab.addEventListener('click', () => {
-            // Убираем активный класс со всех табов
-            tabs.forEach(t => t.classList.remove('active'));
-            // Скрываем весь контент табов
-            tabContents.forEach(content => content.classList.add('hidden'));
-
-            // Активируем текущий таб
-            tab.classList.add('active');
-            
-            // Показываем нужный контент по ID из data-target
-            const targetId = tab.getAttribute('data-target');
-            const targetContent = document.getElementById(targetId);
-            if (targetContent) {
-                targetContent.classList.remove('hidden');
-            }
-        });
+    // Закрытие модального окна при клике на пустое пространство (вокруг картинки)
+    modal.addEventListener("click", function(e) {
+        if (e.target !== modalImg) {
+            closeModal();
+        }
     });
 });
+
+// Функция закрытия (вызывается на крестик или фон)
+function closeModal() {
+    document.getElementById("image-modal").classList.add("hidden");
+}
