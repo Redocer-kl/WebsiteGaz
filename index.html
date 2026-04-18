@@ -623,34 +623,39 @@
         </div>
 
         <div id="tab-ksp" class="tab-content hidden">
-            <div class="ksp-header-bar">
-                <div class="ksp-col-title">график</div>
-                <div class="ksp-col-title">риски</div>
+            <div class="submenu">
+                <div class="submenu-item active" onclick="switchSubTab('ksp-charts', this)">Графики</div>
+                <div class="submenu-item" onclick="switchSubTab('ksp-risks', this)">Риски</div>
             </div>
 
-            <div class="ksp-layout">
-                <div class="ksp-left">
+            <div id="sub-ksp-charts" class="sub-content">
+                <div class="ksp-charts-container">
                     <div class="chart-block">
                         <h3>Актуальный график</h3>
                         <div class="placeholder img-placeholder">
                             <img src="images/Chart1.png" alt="Актуальный график">
                         </div>
                     </div>
-                    <div class="chart-block">
-                        <h3>Версия от 27.02.2026</h3>
-                        <div class="placeholder img-placeholder">
-                            <img src="images/Chart2.png" alt="Версия 27.02">
+
+                    <div class="chart-grid">
+                        <div class="chart-block">
+                            <h3>Версия от 27.02.2026</h3>
+                            <div class="placeholder img-placeholder">
+                                <img src="images/Chart2.png" alt="Версия 27.02">
+                            </div>
                         </div>
-                    </div>
-                    <div class="chart-block">
-                        <h3>Версия от 23.02.2026</h3>
-                        <div class="placeholder img-placeholder">
-                            <img src="images/Chart3.png" alt="Версия 23.02">
+                        <div class="chart-block">
+                            <h3>Версия от 23.02.2026</h3>
+                            <div class="placeholder img-placeholder">
+                                <img src="images/Chart3.png" alt="Версия 23.02">
+                            </div>
                         </div>
                     </div>
                 </div>
+            </div>
 
-                <div class="ksp-right">
+            <div id="sub-ksp-risks" class="sub-content hidden">
+                <div class="risk-matrix-layout">
                     <div class="risk-matrix-container">
                         <table class="risk-matrix">
                             <thead>
@@ -713,29 +718,29 @@
                         </table>
                     </div>
 
-                    <table class="data-table blue-theme" style="margin-top: 30px;">
+                    <table class="data-table blue-theme risk-list-table">
                         <thead>
                             <tr>
-                                <th style="width: 60%; font-size: 1.2em;">Риск</th>
-                                <th style="font-size: 1.2em;">вероятность</th>
+                                <th style="width: 70%;">Риск</th>
+                                <th>Вероятность</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td style="height: 35px;"></td>
-                                <td></td>
+                                <td>Задержка поставки МТР</td>
+                                <td>Средняя</td>
                             </tr>
                             <tr>
-                                <td style="height: 35px;"></td>
-                                <td></td>
+                                <td>Климатические условия (шторм)</td>
+                                <td>Высокая</td>
                             </tr>
                             <tr>
-                                <td style="height: 35px;"></td>
-                                <td></td>
+                                <td>Технический сбой оборудования</td>
+                                <td>Низкая</td>
                             </tr>
                             <tr>
-                                <td style="height: 35px;"></td>
-                                <td></td>
+                                <td>Изменение проектных решений</td>
+                                <td>Средняя</td>
                             </tr>
                         </tbody>
                     </table>
