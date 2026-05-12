@@ -59,7 +59,7 @@
         </nav>
 
         <div class="sub-tabs-container" id="sub-tabs-engineering">
-            <div class="sub-tab active" data-sub="obustroystvo">обустройство</div>
+            <div class="sub-tab active" data-sub="obustroystvo">Обустройство</div>
             <div class="sub-tab" data-sub="gas">Сбор газовой продукции</div>
             <div class="sub-tab" data-sub="oil">Сбор нефтяной продукции</div>
             <div class="sub-tab" data-sub="hydro">Углеводороды</div>
@@ -276,6 +276,193 @@
                         </div>
                     </div>
                 </div>
+
+                <div id="sub-content-gas" class="sub-panel" style="display: none;">
+                    <div class="engineering-grid">
+
+                        <div class="scheme-main-card">
+                            <img src="images/GasMap.png" alt="Схема сбора газа" class="full-scheme">
+                        </div>
+
+                        <div class="stats-sidebar">
+
+                            <div class="info-card gas-chart-card">
+                                <h3 class="card-title-blue">ПРОФИЛЬ ДОБЫЧИ ГАЗА, ПНГ</h3>
+                                <img src="images/GasGrapth.png" alt="График профиля газа" class="chart-img">
+                            </div>
+
+                            <div class="info-card gas-properties-card">
+                                <table class="properties-table">
+                                    <div class="card-header-blue" style="margin: 0; border-radius: 0;">ХАРАКТЕРИСТИКА
+                                    СИСТЕМЫ СБОРА</div>
+                                    <tr>
+                                        <td><img src="icons/pipe_type.png" class="icon-small"></td>
+                                        <td class="prop-label">ТИП ПРОКЛАДКИ</td>
+                                        <td class="prop-value">ПОДЗЕМНО</td>
+                                    </tr>
+                                    <tr>
+                                        <td><img src="icons/insulation.png" class="icon-small"></td>
+                                        <td class="prop-label">НАЛИЧИЕ ИЗОЛЯЦИИ</td>
+                                        <td class="prop-value">ППУ</td>
+                                    </tr>
+                                    <tr>
+                                        <td><img src="icons/nnb.png" class="icon-small"></td>
+                                        <td class="prop-label">КОЛ-ВО ПЕРЕХОДОВ ННБ</td>
+                                        <td class="prop-value">7 шт</td>
+                                    </tr>
+                                    <tr>
+                                        <td><img src="icons/collection_system.png" class="icon-small"></td>
+                                        <td class="prop-label">ТИП СИСТЕМЫ СБОРА</td>
+                                        <td class="prop-value">КОЛЛЕКТОРНАЯ</td>
+                                    </tr>
+                                    <tr>
+                                        <td><img src="icons/methanol_supply.png" class="icon-small"></td>
+                                        <td class="prop-label">ПОДАЧА МЕТАНОЛА И ИК</td>
+                                        <td class="prop-value">ДА</td>
+                                    </tr>
+                                    <tr>
+                                        <td><img src="icons/sod.png" class="icon-small"></td>
+                                        <td class="prop-label">СОД</td>
+                                        <td class="prop-value">ДА</td>
+                                    </tr>
+                                    <tr>
+                                        <td><img src="icons/corrosion.png" class="icon-small"></td>
+                                        <td class="prop-label">БЛОК КОНТРОЛЯ КОРРОЗИИ</td>
+                                        <td class="prop-value">ДА</td>
+                                    </tr>
+                                </table>
+                            </div>
+
+                            <div class="info-card diameter-table-card">
+                                <div class="card-header-blue" style="margin: 0; border-radius: 0;">НЕФТЕСБОРНЫЕ СЕТИ
+                                </div>
+                                <table class="data-table">
+                                    <thead>
+                                        <tr>
+                                            <th>ДИАМЕТР, ММ</th>
+                                            <th>ПРОТЯЖЕННОСТЬ, КМ</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>114</td>
+                                            <td>8,15</td>
+                                        </tr>
+                                        <tr>
+                                            <td>159</td>
+                                            <td>37,7</td>
+                                        </tr>
+                                        <tr>
+                                            <td>219</td>
+                                            <td>14,88</td>
+                                        </tr>
+                                        <tr>
+                                            <td>273</td>
+                                            <td>4,8</td>
+                                        </tr>
+                                        <tr>
+                                            <td>325</td>
+                                            <td>10,15</td>
+                                        </tr>
+                                        <tr>
+                                            <td>426</td>
+                                            <td>7,92</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div id="sub-content-oil" class="sub-panel" style="display: none;">
+                    <div class="engineering-grid">
+
+                        <div class="scheme-main-card">
+                            <img src="images/OilMap.png" alt="Схема сбора нефти" class="full-scheme">
+                        </div>
+
+                        <div class="stats-sidebar">
+
+                            <div class="info-card oil-chart-card">
+                                <h3 class="card-title-blue">ПРОФИЛЬ ДОБЫЧИ ЖУВ</h3>
+                                <img src="images/OilGrapth.png" alt="График профиля ЖУВ" class="chart-img">
+                            </div>
+
+                            <div class="info-card oil-properties-card">
+                                <div class="card-header-blue" style="margin: 0; border-radius: 0;">ХАРАКТЕРИСТИКА
+                                    СИСТЕМЫ СБОРА</div>
+                                <table class="properties-table">
+                                    <tr>
+                                        <td><img src="icons/pipe_type.png" class="icon-small"></td>
+                                        <td class="prop-label">ТИП ПРОКЛАДКИ</td>
+                                        <td class="prop-value">ПОДЗЕМНО</td>
+                                    </tr>
+                                    <tr>
+                                        <td><img src="icons/insulation.png" class="icon-small"></td>
+                                        <td class="prop-label">НАЛИЧИЕ ИЗОЛЯЦИИ</td>
+                                        <td class="prop-value">ППУ</td>
+                                    </tr>
+                                    <tr>
+                                        <td><img src="icons/nnb.png" class="icon-small"></td>
+                                        <td class="prop-label">КОЛ-ВО ПЕРЕХОДОВ ННБ</td>
+                                        <td class="prop-value">4 шт</td>
+                                    </tr>
+                                    <tr>
+                                        <td><img src="icons/collection_system.png" class="icon-small"></td>
+                                        <td class="prop-label">ТИП СИСТЕМЫ СБОРА</td>
+                                        <td class="prop-value">КОЛЛЕКТОРНАЯ</td>
+                                    </tr>
+                                    <tr>
+                                        <td><img src="icons/bdr.png" class="icon-small"></td>
+                                        <td class="prop-label">БДР</td>
+                                        <td class="prop-value">СТАЦИОНАРНЫЕ</td>
+                                    </tr>
+                                    <tr>
+                                        <td><img src="icons/sod.png" class="icon-small"></td>
+                                        <td class="prop-label">СОД</td>
+                                        <td class="prop-value">ДА</td>
+                                    </tr>
+                                    <tr>
+                                        <td><img src="icons/corrosion.png" class="icon-small"></td>
+                                        <td class="prop-label">БЛОК КОНТРОЛЯ КОРРОЗИИ</td>
+                                        <td class="prop-value">ДА</td>
+                                    </tr>
+                                </table>
+                            </div>
+
+                            <div class="info-card diameter-table-card">
+                                <div class="card-header-blue" style="margin: 0; border-radius: 0;">НЕФТЕСБОРНЫЕ СЕТИ
+                                </div>
+                                <table class="data-table">
+                                    <thead>
+                                        <tr>
+                                            <th>ДИАМЕТР, ММ</th>
+                                            <th>ПРОТЯЖЕННОСТЬ, КМ</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>159</td>
+                                            <td>13,07</td>
+                                        </tr>
+                                        <tr>
+                                            <td>219</td>
+                                            <td>5,15</td>
+                                        </tr>
+                                        <tr>
+                                            <td>325</td>
+                                            <td>13,01</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
             </div>
 
             <div id="content-geology" class="tab-panel" style="display: none;">

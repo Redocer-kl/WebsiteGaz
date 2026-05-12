@@ -489,8 +489,8 @@ body {
 }
 
 .icon-small {
-    width: 24px;
-    height: 24px;
+    width: 52px;
+    height: 52px;
     margin-right: 12px;
     object-fit: contain;
 }
@@ -569,4 +569,71 @@ body {
 .transport-text span {
     font-size: 12px;
     opacity: 0.9;
+}
+
+/* Заголовки внутри карточек */
+.card-title-blue {
+    color: var(--primary-blue);
+    font-size: 14px;
+    font-weight: 800;
+    margin: 10px;
+    padding-left: 5px;
+}
+
+/* Таблица свойств с иконками */
+.properties-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 10px 0;
+}
+
+.properties-table td {
+    padding: 8px 5px;
+    border-bottom: 1px solid #f0f0f0;
+    font-size: 12px;
+}
+
+.prop-label {
+    color: #555;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.prop-value {
+    text-align: right;
+    font-weight: 800;
+    color: #333;
+}
+
+/* Итоговая таблица данных */
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.data-table th {
+    background-color: transparent;
+    color: var(--primary-blue);
+    font-size: 12px;
+    font-weight: 800;
+    padding: 10px 5px;
+    border-bottom: 2px solid #e0e0e0;
+    text-align: center;
+}
+
+.data-table td {
+    padding: 8px;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 700;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.data-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.chart-img {
+    border-radius: 10px;
+    width: 100%;
 }

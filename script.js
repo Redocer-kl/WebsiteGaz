@@ -1,96 +1,104 @@
 document.addEventListener('DOMContentLoaded', () => {
-    restoreState(); // Проверяем, где был пользователь
     initTabs();
+    restoreState(); // Сначала инициализируем, потом восстанавливаем
 });
 
 // Переключение между экранами
-function openProject(projectName) {
+function openProject(projectName, shouldSave = true) {
     document.getElementById('screen-list').style.display = 'none';
     document.getElementById('screen-details').style.display = 'block';
 
-    saveState('details', 'engineering', 'obustroystvo');
+    if (shouldSave) {
+        saveState('details', getCurrentTab(), getCurrentSubTab());
+    }
 }
 
-function goHome() {
+function goHome(shouldSave = true) {
     document.getElementById('screen-list').style.display = 'block';
     document.getElementById('screen-details').style.display = 'none';
 
-    saveState('list');
+    if (shouldSave) {
+        saveState('list');
+    }
 }
 
 function initTabs() {
+    // 1. Основные вкладки
     const tabs = document.querySelectorAll('.tab');
-
     tabs.forEach(tab => {
         tab.addEventListener('click', () => {
-            const targetTabId = tab.dataset.tab; // Получаем например 'info' или 'engineering'
-
-            // 1. Меняем активный класс у кнопок вкладок
-            document.querySelector('.tab.active').classList.remove('active');
-            tab.classList.add('active');
-
-            // 2. Прячем все панели контента и показываем нужную
-            document.querySelectorAll('.tab-panel').forEach(panel => {
-                panel.style.display = 'none';
-                panel.classList.remove('active');
-            });
-
-            const targetPanel = document.getElementById(`content-${targetTabId}`);
-            if (targetPanel) {
-                targetPanel.style.display = 'block';
-                targetPanel.classList.add('active');
-            }
-
-            // 3. Управление видимостью подвкладок (только для инжиниринга)
-            const subContainer = document.getElementById('sub-tabs-engineering');
-            if (subContainer) {
-                subContainer.style.display = (targetTabId === 'engineering') ? 'flex' : 'none';
-            }
-            // Внутри функции initTabs добавь обработку подвкладок:
-            const subTabs = document.querySelectorAll('.sub-tab');
-
-            subTabs.forEach(st => {
-                st.addEventListener('click', () => {
-                    // Убираем активный класс у кнопок
-                    document.querySelector('.sub-tab.active').classList.remove('active');
-                    st.classList.add('active');
-
-                    // Скрываем все панели подразделов (если их будет много)
-                    document.querySelectorAll('.sub-panel').forEach(p => p.style.display = 'none');
-
-                    // Показываем нужную панель (например, sub-content-obustroystvo)
-                    const targetId = `sub-content-${st.dataset.sub}`;
-                    const targetPanel = document.getElementById(targetId);
-                    if (targetPanel) {
-                        targetPanel.style.display = 'block';
-                    }
-
-                    saveState('details', 'engineering', st.dataset.sub);
-                });
-            });
-
-            saveState('details', targetTabId);
+            activateTab(tab.dataset.tab);
+            saveState('details', tab.dataset.tab, getCurrentSubTab());
         });
     });
 
-    // Логика подвкладок (остается прежней)
+    // 2. Подвкладки (теперь вешаем один раз при загрузке)
     const subTabs = document.querySelectorAll('.sub-tab');
     subTabs.forEach(st => {
         st.addEventListener('click', () => {
-            document.querySelector('.sub-tab.active').classList.remove('active');
-            st.classList.add('active');
-            saveState('details', 'engineering', st.dataset.sub);
+            activateSubTab(st.dataset.sub);
+            saveState('details', getCurrentTab(), st.dataset.sub);
         });
     });
 }
 
-// Сохранение состояния в LocalStorage
-function saveState(screen, tab = 'engineering', subTab = 'obustroystvo') {
+// Функция чистого переключения основной вкладки (без сохранения)
+function activateTab(tabId) {
+    const tab = document.querySelector(`.tab[data-tab="${tabId}"]`);
+    if (!tab) return;
+
+    // Смена активного класса кнопок
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+
+    // Показ нужной панели
+    document.querySelectorAll('.tab-panel').forEach(panel => {
+        panel.style.display = 'none';
+    });
+
+    const targetPanel = document.getElementById(`content-${tabId}`);
+    if (targetPanel) {
+        targetPanel.style.display = 'block';
+    }
+
+    // Управление видимостью контейнера подвкладок
+    const subContainer = document.getElementById('sub-tabs-engineering');
+    if (subContainer) {
+        subContainer.style.display = (tabId === 'engineering') ? 'flex' : 'none';
+    }
+}
+
+// Функция чистого переключения подвкладки
+function activateSubTab(subId) {
+    const subTab = document.querySelector(`.sub-tab[data-sub="${subId}"]`);
+    if (!subTab) return;
+
+    document.querySelectorAll('.sub-tab').forEach(st => st.classList.remove('active'));
+    subTab.classList.add('active');
+
+    document.querySelectorAll('.sub-panel').forEach(p => p.style.display = 'none');
+    const targetPanel = document.getElementById(`sub-content-${subId}`);
+    if (targetPanel) {
+        targetPanel.style.display = 'block';
+    }
+}
+
+// Хелперы для получения текущего состояния UI
+function getCurrentTab() {
+    return document.querySelector('.tab.active')?.dataset.tab || 'engineering';
+}
+
+function getCurrentSubTab() {
+    return document.querySelector('.sub-tab.active')?.dataset.sub || 'obustroystvo';
+}
+
+// Сохранение состояния
+function saveState(screen, tab, subTab) {
     const state = { screen, tab, subTab };
     localStorage.setItem('app_state', JSON.stringify(state));
 }
 
-// Восстановление состояния при перезагрузке
+// Восстановление состояния
 function restoreState() {
     const saved = localStorage.getItem('app_state');
     if (!saved) return;
@@ -98,18 +106,17 @@ function restoreState() {
     const state = JSON.parse(saved);
 
     if (state.screen === 'details') {
-        openProject(); // Показываем экран деталей
-
-        // Кликаем по нужной вкладке программно, чтобы сработал весь код переключения
-        const tabToActivate = document.querySelector(`[data-tab="${state.tab}"]`);
-        if (tabToActivate) {
-            tabToActivate.click();
+        // Открываем экран без триггера сохранения
+        openProject(null, false); 
+        
+        // Активируем вкладки напрямую без .click()
+        if (state.tab) {
+            activateTab(state.tab);
         }
-
-        // Если это была подвкладка в инжиниринге
         if (state.tab === 'engineering' && state.subTab) {
-            const subTabToActivate = document.querySelector(`[data-sub="${state.subTab}"]`);
-            if (subTabToActivate) subTabToActivate.click();
+            activateSubTab(state.subTab);
         }
+    } else {
+        goHome(false);
     }
 }
