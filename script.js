@@ -120,3 +120,76 @@ function restoreState() {
         goHome(false);
     }
 }
+
+// Логика просмотра изображений
+document.addEventListener('DOMContentLoaded', () => {
+    const viewer = document.getElementById('image-viewer');
+    const fullImg = document.getElementById('full-image');
+    const closeBtn = document.querySelector('.close-viewer');
+    
+    let scale = 1;
+    let isDragging = false;
+    let startX, startY, translateX = 0, translateY = 0;
+
+    // 1. Открытие модалки при клике на любую картинку (кроме иконок)
+    document.addEventListener('click', (e) => {
+        if (e.target.tagName === 'IMG' && !e.target.classList.contains('icon-small') && !e.target.classList.contains('icon-medium')) {
+            viewer.style.display = 'block';
+            fullImg.src = e.target.src;
+            resetTransform();
+        }
+    });
+
+    // 2. Закрытие
+    const closeViewer = () => {
+        viewer.style.display = 'none';
+        resetTransform();
+    };
+
+    closeBtn.onclick = closeViewer;
+    viewer.onclick = (e) => { if (e.target === viewer || e.target.classList.contains('viewer-container')) closeViewer(); };
+
+    // 3. Зум колесиком мыши
+    viewer.onwheel = (e) => {
+        e.preventDefault();
+        const delta = e.deltaY > 0 ? -0.2 : 0.2;
+        scale = Math.min(Math.max(1, scale + delta), 10); // Ограничение зума от 1x до 10x
+        updateTransform();
+    };
+
+    // 4. Перемещение (Drag & Pan)
+    fullImg.onmousedown = (e) => {
+        if (scale > 1) { // Перемещаем только если картинка увеличена
+            isDragging = true;
+            startX = e.clientX - translateX;
+            startY = e.clientY - translateY;
+        }
+    };
+
+    window.onmousemove = (e) => {
+        if (!isDragging) return;
+        translateX = e.clientX - startX;
+        translateY = e.clientY - startY;
+        updateTransform();
+    };
+
+    window.onmouseup = () => {
+        isDragging = false;
+    };
+
+    function updateTransform() {
+        fullImg.style.transform = `translate(${translateX}px, ${translateY}px) scale(${scale})`;
+    }
+
+    function resetTransform() {
+        scale = 1;
+        translateX = 0;
+        translateY = 0;
+        updateTransform();
+    }
+    
+    // Закрытие на ESC
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeViewer();
+    });
+});

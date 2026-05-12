@@ -294,7 +294,7 @@
                             <div class="info-card gas-properties-card">
                                 <table class="properties-table">
                                     <div class="card-header-blue" style="margin: 0; border-radius: 0;">ХАРАКТЕРИСТИКА
-                                    СИСТЕМЫ СБОРА</div>
+                                        СИСТЕМЫ СБОРА</div>
                                     <tr>
                                         <td><img src="icons/pipe_type.png" class="icon-small"></td>
                                         <td class="prop-label">ТИП ПРОКЛАДКИ</td>
@@ -415,7 +415,7 @@
                                         <td class="prop-value">КОЛЛЕКТОРНАЯ</td>
                                     </tr>
                                     <tr>
-                                        <td><img src="icons/bdr.png" class="icon-small"></td>
+                                        <td><img src="icons/methanol_supply.png" class="icon-small"></td>
                                         <td class="prop-label">БДР</td>
                                         <td class="prop-value">СТАЦИОНАРНЫЕ</td>
                                     </tr>
@@ -463,6 +463,153 @@
                     </div>
                 </div>
 
+
+                <div id="sub-content-hydro" class="sub-panel" style="display: none;">
+                    <div class="hydro-bento-grid">
+
+                        <div class="card card-hydro hydro-main-scheme">
+                            <h3 class="card-title-blue">УСТАНОВКА ПРЕДВАРИТЕЛЬНОЙ ПОДГОТОВКИ ГАЗА КОНДЕНСАТА И НЕФТИ
+                            </h3>
+                            <div class="scheme-container">
+                                <img src="images/Pfd.png" alt="Технологическая схема" class="full-scheme">
+                            </div>
+                            <div class="legend-simple">
+                                <span class="l-item"><i style="background:#70d1f4"></i> Газ</span>
+                                <span class="l-item"><i style="background:#000"></i> Нефть</span>
+                                <span class="l-item"><i style="background:#004c97"></i> Вода</span>
+                            </div>
+                        </div>
+
+                        <div class="card card-hydro hydro-external-gas">
+                            <div class="card-header-blue">ГАЗОПРОВОД ВНЕШНЕГО ТРАНСПОРТА</div>
+                            <table class="data-table small-text">
+                                <thead>
+                                    <tr>
+                                        <th>ПЕРИОД</th>
+                                        <th>L, КМ</th>
+                                        <th>P, ММ</th>
+                                        <th>Q, МЛРД</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>До 2031</td>
+                                        <td rowspan="2">107</td>
+                                        <td rowspan="2">630</td>
+                                        <td>4,0</td>
+                                    </tr>
+                                    <tr>
+                                        <td>С 2031</td>
+                                        <td>6,0</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="card card-hydro hydro-props1">
+                            <div class="props-mini">
+                                <p>Обводненность: 4,1%</p>
+                                <p>Температура: 4±2 °С</p>
+                                <p>Давление – 8 МПа</p>
+                                <p>Q = 6.1 млрд м3/год </p>
+                                <p>Давление на входе: </p>
+                            </div>
+
+                            <img src="images/Chart1.png" alt="График давления" class="mini-chart">
+                        </div>
+
+                        <div class="card card-hydro hydro-props">
+                            <div class="card-header-blue">КП Нефти</div>
+                            <div class="props-mini">
+                                <p>Обводненность: 9,52%</p>
+                                <p>ГФ – 541,75 м³/м³</p>
+                                <p>Температура: 10±2 °С</p>
+                                <p>Давление – 1,2 МПа</p>
+                                <p>Q = 0,6 млн т/год </p>
+                            </div>
+                        </div>
+
+                        <div class="card card-hydro hydro-oil-truck">
+                            <div class="card-header-blue">АВТОВЫВОЗ НЕФТИ</div>
+                            <div class="flex-row-stats">
+                                <div class="stat-item">
+                                    <span>ДЛИНА, КМ</span>
+                                    <strong>107</strong>
+                                </div>
+                                <div class="stat-item">
+                                    <span>ОБЪЕМ, МЛН Т/ГОД</span>
+                                    <strong>0,4</strong>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card card-hydro hydro-dns">
+                            <div class="card-header-blue">ДНС + АВТОВЫВОЗ</div>
+                            <table class="data-table-simple">
+                                <tr>
+                                    <td>Qн</td>
+                                    <td>0,4 млн т/год</td>
+                                </tr>
+                                <tr>
+                                    <td>ГФ</td>
+                                    <td>22,38 м³/м³</td>
+                                </tr>
+                                <tr>
+                                    <td>Температура</td>
+                                    <td>32,5 °С</td>
+                                </tr>
+                            </table>
+                        </div>
+
+                        <div class="card card-hydro hydro-compressors">
+                            <div class="card-header-blue">КОМПРЕССОРНЫЕ СТАНЦИИ</div>
+                            <table class="data-table-simple">
+                                <thead>
+                                    <tr>
+                                        <th>БЛОК</th>
+                                        <th>P (МПА)</th>
+                                        <th>N (КВТ)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>ДКС (ПГ)</td>
+                                        <td>10,2</td>
+                                        <td>16 330</td>
+                                    </tr>
+                                    <tr>
+                                        <td>КС-1</td>
+                                        <td>3,25</td>
+                                        <td>3 600</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="card card-hydro hydro-uppg">
+                            <div class="card-header-blue">УППГ</div>
+                            <table class="data-table-simple">
+                                <tr>
+                                    <td>Qпр</td>
+                                    <td>5,8 млрд м³/год</td>
+                                </tr>
+                                <tr>
+                                    <td>Температура</td>
+                                    <td>20 °С</td>
+                                </tr>
+                                <tr>
+                                    <td>QMeOH</td>
+                                    <td>854 т/год</td>
+                                </tr>
+                            </table>
+                        </div>
+
+                        <div class="card card-hydro hydro-map">
+                            <img src="images/TransportMap.png" alt="Карта транспорта" class="map-img-fit">
+                        </div>
+
+                    </div>
+                </div>
             </div>
 
             <div id="content-geology" class="tab-panel" style="display: none;">
@@ -472,7 +619,12 @@
     </div>
 
 
-
+    <div id="image-viewer" class="modal-viewer">
+        <span class="close-viewer">&times;</span>
+        <div class="viewer-container">
+            <img id="full-image" src="" alt="Full View">
+        </div>
+    </div>
     <script src="script.js"></script>
 </body>
 
