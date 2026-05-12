@@ -1,77 +1,115 @@
-// Функция для перехода с главного экрана на экран проекта
-function openProject() {
-    document.getElementById('home-view').classList.add('hidden');
-    document.getElementById('project-view').classList.remove('hidden');
+document.addEventListener('DOMContentLoaded', () => {
+    restoreState(); // Проверяем, где был пользователь
+    initTabs();
+});
+
+// Переключение между экранами
+function openProject(projectName) {
+    document.getElementById('screen-list').style.display = 'none';
+    document.getElementById('screen-details').style.display = 'block';
+
+    saveState('details', 'engineering', 'obustroystvo');
 }
 
-// Функция для возврата к выбору проектов
-function backToProjects() {
-    document.getElementById('project-view').classList.add('hidden');
-    document.getElementById('home-view').classList.remove('hidden');
+function goHome() {
+    document.getElementById('screen-list').style.display = 'block';
+    document.getElementById('screen-details').style.display = 'none';
+
+    saveState('list');
 }
 
-// Функция для переключения главных вкладок внутри проекта (верхнее оранжевое меню)
-function switchTab(tabId, element) {
-    // Убираем активный класс у всех главных кнопок меню
-    const navItems = document.querySelectorAll('.nav-item');
-    navItems.forEach(item => item.classList.remove('active'));
+function initTabs() {
+    const tabs = document.querySelectorAll('.tab');
 
-    // Добавляем класс нажатой кнопке
-    element.classList.add('active');
+    tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+            const targetTabId = tab.dataset.tab; // Получаем например 'info' или 'engineering'
 
-    // Скрываем все главные вкладки
-    const tabs = document.querySelectorAll('.tab-content');
-    tabs.forEach(tab => tab.classList.add('hidden'));
+            // 1. Меняем активный класс у кнопок вкладок
+            document.querySelector('.tab.active').classList.remove('active');
+            tab.classList.add('active');
 
-    // Показываем выбранную вкладку
-    document.getElementById('tab-' + tabId).classList.remove('hidden');
-}
+            // 2. Прячем все панели контента и показываем нужную
+            document.querySelectorAll('.tab-panel').forEach(panel => {
+                panel.style.display = 'none';
+                panel.classList.remove('active');
+            });
 
-// Функция для переключения подменю (серое меню во вкладке Экономика)
-function switchSubTab(subTabId, element) {
-    // Убираем активный класс у всех кнопок подменю
-    const subNavItems = document.querySelectorAll('.submenu-item');
-    subNavItems.forEach(item => item.classList.remove('active'));
+            const targetPanel = document.getElementById(`content-${targetTabId}`);
+            if (targetPanel) {
+                targetPanel.style.display = 'block';
+                targetPanel.classList.add('active');
+            }
 
-    // Добавляем класс нажатой кнопке
-    element.classList.add('active');
+            // 3. Управление видимостью подвкладок (только для инжиниринга)
+            const subContainer = document.getElementById('sub-tabs-engineering');
+            if (subContainer) {
+                subContainer.style.display = (targetTabId === 'engineering') ? 'flex' : 'none';
+            }
+            // Внутри функции initTabs добавь обработку подвкладок:
+            const subTabs = document.querySelectorAll('.sub-tab');
 
-    // Скрываем все контенты подменю
-    const subTabs = document.querySelectorAll('.sub-content');
-    subTabs.forEach(tab => tab.classList.add('hidden'));
+            subTabs.forEach(st => {
+                st.addEventListener('click', () => {
+                    // Убираем активный класс у кнопок
+                    document.querySelector('.sub-tab.active').classList.remove('active');
+                    st.classList.add('active');
 
-    // Показываем выбранный контент подменю
-    document.getElementById('sub-' + subTabId).classList.remove('hidden');
-}
+                    // Скрываем все панели подразделов (если их будет много)
+                    document.querySelectorAll('.sub-panel').forEach(p => p.style.display = 'none');
 
-// Этот код сработает после загрузки всей страницы
-document.addEventListener("DOMContentLoaded", () => {
-    const modal = document.getElementById("image-modal");
-    const modalImg = document.getElementById("modal-img");
+                    // Показываем нужную панель (например, sub-content-obustroystvo)
+                    const targetId = `sub-content-${st.dataset.sub}`;
+                    const targetPanel = document.getElementById(targetId);
+                    if (targetPanel) {
+                        targetPanel.style.display = 'block';
+                    }
 
-    // Ищем все теги img на странице
-    const images = document.querySelectorAll("img");
+                    saveState('details', 'engineering', st.dataset.sub);
+                });
+            });
 
-    images.forEach(img => {
-        // Исключаем саму картинку внутри модалки, чтобы не зациклить
-        if (img.id === "modal-img") return;
-
-        // По клику на любую картинку показываем модалку
-        img.addEventListener("click", function() {
-            modal.classList.remove("hidden");
-            modalImg.src = this.src; // Копируем путь нажатой картинки в модалку
+            saveState('details', targetTabId);
         });
     });
 
-    // Закрытие модального окна при клике на пустое пространство (вокруг картинки)
-    modal.addEventListener("click", function(e) {
-        if (e.target !== modalImg) {
-            closeModal();
-        }
+    // Логика подвкладок (остается прежней)
+    const subTabs = document.querySelectorAll('.sub-tab');
+    subTabs.forEach(st => {
+        st.addEventListener('click', () => {
+            document.querySelector('.sub-tab.active').classList.remove('active');
+            st.classList.add('active');
+            saveState('details', 'engineering', st.dataset.sub);
+        });
     });
-});
+}
 
-// Функция закрытия (вызывается на крестик или фон)
-function closeModal() {
-    document.getElementById("image-modal").classList.add("hidden");
+// Сохранение состояния в LocalStorage
+function saveState(screen, tab = 'engineering', subTab = 'obustroystvo') {
+    const state = { screen, tab, subTab };
+    localStorage.setItem('app_state', JSON.stringify(state));
+}
+
+// Восстановление состояния при перезагрузке
+function restoreState() {
+    const saved = localStorage.getItem('app_state');
+    if (!saved) return;
+
+    const state = JSON.parse(saved);
+
+    if (state.screen === 'details') {
+        openProject(); // Показываем экран деталей
+
+        // Кликаем по нужной вкладке программно, чтобы сработал весь код переключения
+        const tabToActivate = document.querySelector(`[data-tab="${state.tab}"]`);
+        if (tabToActivate) {
+            tabToActivate.click();
+        }
+
+        // Если это была подвкладка в инжиниринге
+        if (state.tab === 'engineering' && state.subTab) {
+            const subTabToActivate = document.querySelector(`[data-sub="${state.subTab}"]`);
+            if (subTabToActivate) subTabToActivate.click();
+        }
+    }
 }

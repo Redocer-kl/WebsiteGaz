@@ -4,1029 +4,287 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Единая Цифровая Система</title>
+    <title>Единая цифровая система</title>
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-    <div id="home-view">
-        <h1 class="home-title">ЕДИНАЯ ЦИФРОВАЯ СИСТЕМА</h1>
-        <div class="home-subtitle">Выберите проект</div>
+    <div id="screen-list" class="container">
+        <header class="header">
+            <h1>ЕДИНАЯ ЦИФРОВАЯ СИСТЕМА</h1>
+            <p class="subtitle">Выберите проект</p>
+        </header>
 
-        <table class="projects-table">
-            <thead>
-                <tr>
-                    <th>Проект</th>
-                    <th>Статус</th>
-                    <th>Дата начала работы</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr class="project-row" onclick="openProject()">
-                    <td>Проект 1</td>
-                    <td>
-                        <div class="progress-container">
-                            <div class="progress-bar">
-                                <div class="progress-fill" style="width: 30%;"></div>
-                            </div>
-                            <span>30%</span>
-                        </div>
-                    </td>
-                    <td>2.08.2025</td>
-                </tr>
-                <tr class="project-row" onclick="openProject()">
-                    <td>Проект 2</td>
-                    <td>
-                        <div class="progress-container">
-                            <div class="progress-bar">
-                                <div class="progress-fill" style="width: 60%;"></div>
-                            </div>
-                            <span>60%</span>
-                        </div>
-                    </td>
-                    <td>30.01.2025</td>
-                </tr>
-                <tr class="project-row" onclick="openProject()">
-                    <td>Проект 3</td>
-                    <td>
-                        <div class="progress-container">
-                            <div class="progress-bar">
-                                <div class="progress-fill" style="width: 90%;"></div>
-                            </div>
-                            <span>90%</span>
-                        </div>
-                    </td>
-                    <td>22.01.2025</td>
-                </tr>
-            </tbody>
-        </table>
+        <main class="project-list">
+            <div class="table-header">
+                <span>Проект</span>
+                <span>Статус</span>
+                <span>Дата начала работы</span>
+            </div>
+
+            <div class="project-row" onclick="openProject('INBB')">
+                <div class="project-name">INBB</div>
+                <div class="project-status">
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 30%;"></div>
+                    </div>
+                    <span class="percentage">30%</span>
+                </div>
+                <div class="project-date">22.01.2025</div>
+            </div>
+        </main>
+
+        <button class="create-project">
+            <span class="plus-icon">+</span>
+            Создать проект
+        </button>
     </div>
 
-    <div id="project-view" class="hidden">
-        <div class="nav-menu">
-            <div class="nav-item active" onclick="switchTab('general', this)">Общая<br>информация</div>
-            <div class="nav-item" onclick="switchTab('engineering', this)">Инжиниринг</div>
-            <div class="nav-item" onclick="switchTab('geology', this)">Геология</div>
-            <div class="nav-item" onclick="switchTab('pir', this)">ПИР</div>
-            <div class="nav-item" onclick="switchTab('infrastructure', this)">Капитальное строительство</div>
-            <div class="nav-item" onclick="switchTab('logistics', this)">Логистика и<br>МТО</div>
-            <div class="nav-item" onclick="switchTab('ksp', this)">КСП и риски</div>
-            <div class="nav-item" onclick="switchTab('economics', this)">Экономика</div>
-            <div class="nav-item" onclick="switchTab('safety', this)" style="border-right: none;">Безопасность</div>
-            <div class="nav-item" onclick="switchTab('documents', this)">Документы</div>
+    <div id="screen-details" class="container-fluid" style="display: none;">
+        <nav class="top-nav">
+            <button class="btn-home" onclick="goHome()">← Назад к проектам</button>
+            <div class="tabs-container" id="main-tabs">
+                <div class="tab" data-tab="info">Общая информация</div>
+                <div class="tab" data-tab="geology">Геология и бурение</div>
+                <div class="tab active" data-tab="engineering">Инжиниринг</div>
+                <div class="tab" data-tab="construction">Капитальное строительство</div>
+                <div class="tab" data-tab="pir">ПИР</div>
+                <div class="tab" data-tab="risks">КСП и риски</div>
+                <div class="tab" data-tab="logistics">Логистика и мто</div>
+                <div class="tab" data-tab="economy">Экономика</div>
+                <div class="tab" data-tab="safety">Безопасность</div>
+                <div class="tab" data-tab="docs">Документы</div>
+            </div>
+        </nav>
+
+        <div class="sub-tabs-container" id="sub-tabs-engineering">
+            <div class="sub-tab active" data-sub="obustroystvo">обустройство</div>
+            <div class="sub-tab" data-sub="gas">Сбор газовой продукции</div>
+            <div class="sub-tab" data-sub="oil">Сбор нефтяной продукции</div>
+            <div class="sub-tab" data-sub="hydro">Углеводороды</div>
         </div>
 
-        <div class="project-header-right">.</div>
-
-        <div id="tab-general" class="tab-content">
-
-            <div class="roadmap-container">
-                <div class="roadmap-line"></div>
-                <div class="roadmap-flag">🚩</div>
-                <div class="roadmap-steps">
-                    <div class="roadmap-step">
-                        <div class="step-dot"></div>
-                        <div class="step-title">Определение</div>
-                        <div class="step-date">I 2026</div>
-                    </div>
-                    <div class="roadmap-step">
-                        <div class="step-dot"></div>
-                        <div class="step-title">Выбор</div>
-                        <div class="step-date">I 2026-I 2027</div>
-                    </div>
-                    <div class="roadmap-step">
-                        <div class="step-dot"></div>
-                        <div class="step-title">ОТР</div>
-                        <div class="step-date">I-IV 2026</div>
-                    </div>
-                    <div class="roadmap-step">
-                        <div class="step-dot"></div>
-                        <div class="step-title">ЗУР</div>
-                        <div class="step-date">II-IV 2026</div>
-                    </div>
-                    <div class="roadmap-step">
-                        <div class="step-dot active-dot"></div>
-                        <div class="step-title">Контр.</div>
-                        <div class="step-date">I-II 2026</div>
-                    </div>
-                    <div class="roadmap-step">
-                        <div class="step-dot "></div>
-                        <div class="step-title">ИИ</div>
-                        <div class="step-date">II 2026-I 2027</div>
-                    </div>
-                    <div class="roadmap-step">
-                        <div class="step-dot"></div>
-                        <div class="step-title">Реализация</div>
-                        <div class="step-date">III 2029</div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="dashboard-grid">
-
-                <div class="dash-card card-events">
-                    <h3 class="dash-title">КЛЮЧЕВЫЕ СОБЫТИЯ II КВ. 2026</h3>
-                    <ul class="dash-list">
-                        <li>18.05 – Предзащита 4 вехи</li>
-                        <li>22.05 – Защита 4 вехи</li>
-                        <li>17.06 – ИКК</li>
-                    </ul>
-                </div>
-
-                <div class="dash-card card-map">
-                    <h3 class="dash-title">КАРТА МЕСТОРОЖДЕНИЯ</h3>
-                    <div class="dash-img-placeholder">
-                        <img src="images/MapMestoroshdenie.png" alt="">
-                    </div>
-                </div>
-
-                <div class="dash-card card-drill">
-                    <h3 class="dash-title">ГРАФИК БУРЕНИЯ</h3>
-                    <div class="dash-img-placeholder" style="min-height: 160px;">
-                       <img src="images/GraphBurenie.png" alt="">
-                    </div>
-                    <div class="dash-drilling-stats">
-                        БУРЕНИЕ СКВАЖИН ШТ./МЛРД РУБ.
-                        <span class="highlight-num">503</span>
-                    </div>
-                </div>
-
-                <div class="dash-card card-pir">
-                    <h3 class="dash-title">ПИР: Проектные институты</h3>
-                    <ul class="dash-list columns-2">
-                        <li>Гипротюменнефтегаз</li>
-                        <li>Гипровостокнефть</li>
-                        <li>НИПИ НГ ПЕТОН</li>
-                        <li>Газпром проектирование</li>
-                    </ul>
-                </div>
-
-                <div class="dash-card card-wells">
-                    <h3 class="dash-title">ГРАФИК СТРОИТЕЛЬСТВА СКВАЖИН</h3>
-                    <div class="dash-img-placeholder" style="min-height: 100px;">
-                         <img src="images/GraphStroitelsctvo.png" alt="">
-                    </div>
-                </div>
-
-                <div class="dash-card card-cap">
-                    <h3 class="dash-title">КАПИТАЛЬНОЕ СТРОИТЕЛЬСТВО</h3>
-                    <div class="dash-img-placeholder" style="min-height: 180px;">
-                        <img src="images/CapitalStroitel.png" alt="">
-                    </div>
-                    <ul class="dash-list list-no-bullet" style="margin-top: 10px;">
-                        <li><strong style="color: #0073cc;">1 ЛОТ</strong> «Стройтрансгаз»</li>
-                        <li><strong style="color: #0073cc;">2 ЛОТ</strong> «Талспецстрой»</li>
-                        <li><strong style="color: #0073cc;">3 ЛОТ</strong> «Газстройпром»</li>
-                    </ul>
-                </div>
-
-                <div class="dash-card card-mat">
-                    <h3 class="dash-title">МАТЕРИАЛЬНО-ТЕХНИЧЕСКОЕ</h3>
-                    <div class="dash-img-placeholder" style="min-height: 120px;">
-                        <img src="images/Material.png" alt="">
-                    </div>
-                </div>
-
-                <div class="dash-card card-eng">
-                    <h3 class="dash-title">ИНЖИНИРИНГ</h3>
-                    <div class="dash-img-placeholder" style="min-height: 80px; margin-bottom: 10px;">
-                        <img src="images/Gaz.png" alt="">
-                    </div>
-                    <div class="dash-img-placeholder" style="min-height: 80px;">
-                        <img src="images/Zyv.png" alt="">
-                    </div>
-                </div>
-
-                <div class="dash-card card-kpi">
-                    <h3 class="dash-title">УДЕЛЬНЫЕ ПОКАЗАТЕЛИ</h3>
-                    <table class="dash-kpi-table">
-                        <tr>
-                            <td>Цена на нефть</td>
-                            <td>5667 р/баррель</td>
-                        </tr>
-                        <tr>
-                            <td>Цена на ПГ</td>
-                            <td>2344 р/м³</td>
-                        </tr>
-                        <tr>
-                            <td>НДС</td>
-                            <td>22%</td>
-                        </tr>
-                        <tr>
-                            <td>Ставка дисконт.</td>
-                            <td>14%</td>
-                        </tr>
-                    </table>
-                </div>
-
-                <div class="dash-card card-fem">
-                    <h3 class="dash-title">ФЭМ</h3>
-                    <div class="dash-img-placeholder" style="min-height: 150px;">
-                        <img src="images/NPV.png" alt="">
-                    </div>
-                </div>
-
-            </div>
-        </div>
-
-        <div id="tab-engineering" class="tab-content hidden">
-            <div class="submenu engineering-submenu">
-                <button class="submenu-item active" onclick="switchSubTab('arrangement', this)">Обустройство</button>
-                <button class="submenu-item" onclick="switchSubTab('gas-collection', this)">Сбор газовой
-                    продукции</button>
-                <button class="submenu-item" onclick="switchSubTab('oil-collection', this)">Сбор нефтяной
-                    продукции</button>
-                <button class="submenu-item" onclick="switchSubTab('hydrocarbons', this)">Углеводороды</button>
-            </div>
-
-            <div id="sub-arrangement" class="sub-content">
-                <div class="engineering-container">
-                    <div class="eng-image-side">
-                        <div class="placeholder" style="height: 400px;">
-                            Схема объектов обустройства (Кустовые площадки, БКНС, УПСВ)
+        <main class="content-area">
+            <div id="content-info" class="tab-panel">
+                <div class="dashboard-container">
+                    <div class="timeline">
+                        <div class="timeline-line"></div>
+                        <div class="timeline-item active">
+                            <div class="dot"></div>
+                            <div class="label">Определение</div>
+                            <div class="date">I 2026</div>
                         </div>
-                    </div>
-                    <div class="eng-table-side">
-                        <table class="projects-table">
-                            <thead>
-                                <tr>
-                                    <th colspan="2">Характеристика объекта</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Нефтяные кусты</td>
-                                    <td>3 кл</td>
-                                </tr>
-                                <tr>
-                                    <td>Газовые кусты</td>
-                                    <td>11 кл</td>
-                                </tr>
-                                <tr>
-                                    <td>Совмещенные кусты</td>
-                                    <td>1 кл</td>
-                                </tr>
-                                <tr>
-                                    <td>Скважины</td>
-                                    <td>17 / 47 шт</td>
-                                </tr>
-                                <tr>
-                                    <td>НСС</td>
-                                    <td>31.2 км</td>
-                                </tr>
-                                <tr>
-                                    <td>ГСС</td>
-                                    <td>83 км</td>
-                                </tr>
-                                <tr>
-                                    <td>Метанолопроводы</td>
-                                    <td>83 км</td>
-                                </tr>
-                                <tr>
-                                    <td>ВЕЦ на базе ГПЭС</td>
-                                    <td>20 МВт</td>
-                                </tr>
-                                <tr>
-                                    <td>ВЛ 10кВ</td>
-                                    <td>99.3 км</td>
-                                </tr>
-                                <tr>
-                                    <td>Автодороги <br>Трасса/промысловые</td>
-                                    <td>67/99.3 км</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-
-            <div id="sub-gas-collection" class="sub-content hidden">
-                <div class="engineering-container">
-                    <div class="eng-image-side">
-                        <div class="placeholder" style="height: 350px;">Схема газосборной сети и УКПГ</div>
-                    </div>
-                    <div class="eng-table-side">
-                        <table class="projects-table">
-                            <thead>
-                                <tr>
-                                    <th>Элемент системы</th>
-                                    <th>Технические данные</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Газосборный коллектор</td>
-                                    <td>Диаметр: 530 мм, P_раб: 7.5 МПа</td>
-                                </tr>
-                                <tr>
-                                    <td>Сепаратор первой ступени</td>
-                                    <td>Отделение конденсата и пластовой воды</td>
-                                </tr>
-                                <tr>
-                                    <td>Абсорбер (Осушка)</td>
-                                    <td>Точка росы по влаге: -20°C</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-
-            <div id="sub-oil-collection" class="sub-content hidden">
-                <div class="engineering-container">
-                    <div class="eng-image-side">
-                        <div class="placeholder" style="height: 350px;">Технологическая схема сбора нефти</div>
-                    </div>
-                    <div class="eng-table-side">
-                        <table class="projects-table">
-                            <thead>
-                                <tr>
-                                    <th>Тип системы</th>
-                                    <th>Характеристики</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Герметизированная (однотрубная)</td>
-                                    <td>Сбор нефти и газа без потерь давления</td>
-                                </tr>
-                                <tr>
-                                    <td>АГЗУ «Спутник»</td>
-                                    <td>Погрешность измерения массы: ±2%</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-
-            <div id="sub-hydrocarbons" class="sub-content hidden">
-                <div class="hydro-grid">
-                    <div class="chart-box">
-                        <h4>График разгонки нефти (ИТК)</h4>
-                        <div class="placeholder" style="height: 250px;">[График: Выход фракций от температуры]</div>
-                    </div>
-                    <div class="chart-box">
-                        <h4>Фазовая диаграмма смеси</h4>
-                        <div class="placeholder" style="height: 250px;">[График: P-T зависимость]</div>
-                    </div>
-                </div>
-                <table class="projects-table" style="margin-top: 20px;">
-                    <thead>
-                        <tr>
-                            <th>Компонент</th>
-                            <th>Молярная доля, %</th>
-                            <th>Плотность, кг/м³</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Метан (C1)</td>
-                            <td>85.4</td>
-                            <td>0.668</td>
-                        </tr>
-                        <tr>
-                            <td>Этан (C2)</td>
-                            <td>4.2</td>
-                            <td>1.26</td>
-                        </tr>
-                        <tr>
-                            <td>Нефть (общая)</td>
-                            <td>—</td>
-                            <td>845</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
-        <div id="tab-documents" class="tab-content hidden">
-            <div class="documents-container">
-                <div class="docs-header">
-                    <span>Поиск ...</span>
-                    <span>Фильтры</span>
-                </div>
-                <table class="docs-table">
-                    <tr>
-                        <td style="width: 15%;"><span class="file-icon">pptx <span
-                                    class="icon-folder icon-color-orange">📂</span></span></td>
-                        <td>Презентация КЭП</td>
-                        <td style="width: 15%;"></td>
-                        <td style="width: 25%;"></td>
-                    </tr>
-                    <tr>
-                        <td><span class="file-icon">pdf <span class="icon-folder icon-color-red">📁</span></span></td>
-                        <td>Изменение размера НДС, письмо мини...</td>
-                        <td>1.03.2026</td>
-                        <td>Уведомления</td>
-                    </tr>
-                </table>
-            </div>
-        </div>
-
-        <div id="tab-geology" class="tab-content hidden">
-            <div class="geology-layout">
-                <div class="geo-left">
-                    <div class="placeholder geo-map-placeholder">
-                        <img src="images/GasMap.png" alt="">
-                    </div>
-                    <div class="placeholder geo-chart-placeholder">
-                        <img src="images/MapProfile.png" alt="">
-                    </div>
-                </div>
-                <div class="geo-right">
-                    <div class="placeholder geo-timeline-placeholder">
-                        <img src="images/Plan.png" alt="">
-                    </div>
-
-                    <div class="file-upload-box">
-                        <div class="file-name"><span class="icon-color-green">📁</span> Какие-то файлы.xlsx</div>
-                        <div class="upload-area">Загрузите файл</div>
-                    </div>
-
-                    <div class="geo-table-container">
-                        <div class="geo-table-header">1. Геологическая модель и запасы</div>
-                        <table class="geo-table">
-                            <tr>
-                                <td>Показатель</td>
-                                <td>Значение</td>
-                            </tr>
-                            <tr>
-                                <td>Начальные извлекаемые запасы нефти (А+В1+С1)</td>
-                                <td>45,2 млн т</td>
-                            </tr>
-                            <tr>
-                                <td>Начальные извлекаемые запасы газа (свободного)</td>
-                                <td>121,7 млрд м³</td>
-                            </tr>
-                            <tr>
-                                <td>Конденсат (извлекаемый)</td>
-                                <td>8,3 млн т</td>
-                            </tr>
-                            <tr>
-                                <td>Коэффициент извлечения нефти (КИН)</td>
-                                <td>0,42</td>
-                            </tr>
-                            <tr>
-                                <td>Достоверность геологической модели</td>
-                                <td>87% (принята)</td>
-                            </tr>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div id="tab-economics" class="tab-content hidden">
-            <div class="submenu">
-                <div class="submenu-item active" onclick="switchSubTab('cost-eng', this)">Стоимостной инжиниринг</div>
-                <div class="submenu-item" onclick="switchSubTab('pricing', this)">Ценообразование</div>
-            </div>
-
-            <div id="sub-cost-eng" class="sub-content">
-                <div class="eco-layout">
-                    <div class="eco-left">
-                        <h2 class="eco-title">Удельные показатели</h2>
-                        <table class="eco-kpi-table">
-                            <tr>
-                                <td>NPV</td>
-                                <td class="text-green">34.5 млрд</td>
-                            </tr>
-                            <tr>
-                                <td>IRR</td>
-                                <td class="text-green">15%</td>
-                            </tr>
-                            <tr>
-                                <td>PI</td>
-                                <td class="text-orange">1,2</td>
-                            </tr>
-                            <tr>
-                                <td>PVI</td>
-                                <td class="text-red">12 млрд</td>
-                            </tr>
-                        </table>
-
-                        <h2 class="eco-title">Удельные показатели</h2>
-                        <table class="eco-kpi-table">
-                            <tr>
-                                <td>Цена на нефть</td>
-                                <td>5667 р/баррель</td>
-                            </tr>
-                            <tr>
-                                <td>Цена на ПГ</td>
-                                <td>2344 р/м³</td>
-                            </tr>
-                            <tr>
-                                <td>НДС</td>
-                                <td>22%</td>
-                            </tr>
-                            <tr>
-                                <td>Ставка дисконт.</td>
-                                <td>14%</td>
-                            </tr>
-                        </table>
-
-                        <div class="placeholder eco-chart-placeholder">
-                            <img src="images/NPV.png" alt="">
+                        <div class="timeline-item">
+                            <div class="dot"></div>
+                            <div class="label">Выбор</div>
+                            <div class="date">I 2026-I 2027</div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="dot"></div>
+                            <div class="label">ОТР</div>
+                            <div class="date">I-IV 2026</div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="dot"></div>
+                            <div class="label">ЗУР</div>
+                            <div class="date">II-IV 2026</div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="dot"></div>
+                            <div class="label">Контр.</div>
+                            <div class="date">I-II 2026</div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="dot"></div>
+                            <div class="label">ИИ</div>
+                            <div class="date">II 2026-I 2027</div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="dot"></div>
+                            <div class="label">Реализация</div>
+                            <div class="date">III 2029</div>
                         </div>
                     </div>
 
-                    <div class="eco-right">
-                        <div class="capex-opex-grid">
-                            <div class="capex-card">
-                                <div class="capex-header">CAPEX</div>
-                                <div class="placeholder donut-placeholder"><img src="images/Capex.png" alt="">
+                    <div class="bento-grid">
+
+                        <div class="card key-events">
+                            <h3>КЛЮЧЕВЫЕ СОБЫТИЯ НА III КВ. 2026</h3>
+                            <div class="events-list">
+                                <ul>
+                                    <li>06.03 - Сдача материалов</li>
+                                    <li>10.03 - Предзащита 3 вехи</li>
+                                    <li>13.03 - Защита 3 вехи</li>
+                                </ul>
+                                <ul>
+                                    <li>19.05 - Предзащита 4 вехи</li>
+                                    <li>22.05 - Защита 4 вехи</li>
+                                    <li>17.06 - Итоговая защита 5 вехи</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="card production">
+                            <h3>ПРОФИЛЬ ДОБЫЧИ</h3>
+                            <img src="images/Profile.png" alt="График добычи">
+                        </div>
+
+                        <div class="card well-construction">
+                            <h3>ГРАФИК СТРОИТЕЛЬСТВА СКВАЖИН</h3>
+                            <img src="images/GraphBuildingHoles.png" alt="График скважин">
+                        </div>
+
+                        <div class="card scheme">
+                            <h3>УТВЕРЖДЕННАЯ СХЕМА ОБУСТРОЙСТВА</h3>
+                            <img src="images/Map.png" alt="Схема обустройства">
+                        </div>
+
+                        <div class="card risks">
+                            <h3>РИСКИ</h3>
+                            <div class="risks-content">
+                                <div class="risks-img">
+                                    <img src="images/Risk.png" alt="Диаграмма рисков">
+                                </div>
+                                <ul>
+                                    <li>Корректировка проекта в связи с не подтверждением геологических запасов</li>
+                                    <li>Задержка поставки оборудования из-за загруженности в Усть-Куте</li>
+                                    <li>Увеличение длительности контрактования/стоимости договора из-за ограниченного
+                                        рынка поставщиков и заводов</li>
+                                    <li>Необеспечение плановых темпов выработки со стороны ПО на СМР по причине
+                                        кадрового дефицита</li>
+                                    <li>Удорожание/снижение выработки обустройства инженерной подготовки из-за низкого
+                                        качества песка</li>
+                                    <li>Выход из строя сложного технологического оборудования</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="card contracting">
+                            <h3>СТРАТЕГИИ КОНТРАКТОВАНИЯ</h3>
+                            <img src="images/Contract.png" alt="Контрактование">
+                        </div>
+
+                        <div class="card logistics">
+                            <h3>ЛОГИСТИЧЕСКАЯ СТРАТЕГИЯ</h3>
+                            <img src="images/Logistic.png" alt="Логистика">
+                        </div>
+
+                        <div class="card economics">
+                            <h3>ЭКОНОМИЧЕСКИЕ ПОКАЗАТЕЛИ ЭФФЕКТИВНОСТИ</h3>
+                            <div class="econ-data">
+                                <div class="metrics">
+                                    <p>CAPEX: <br><strong>142,3 МЛРД</strong></p>
+                                    <p>OPEX: <br><strong>123,4 МЛРД</strong></p>
+                                </div>
+                                <img src="images/FEM.png" alt="Экономика">
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div id="content-engineering" class="tab-panel" style="display: none;">
+                <div id="sub-content-obustroystvo" class="sub-panel">
+                    <div class="engineering-grid">
+                        <div class="scheme-main-card">
+                            <img src="images/Map.png" alt="Схема обустройства" class="full-scheme">
+                        </div>
+
+                        <div class="stats-sidebar">
+
+                            <div class="info-card char-card">
+                                <div class="card-header-blue">ХАРАКТЕРИСТИКА ОБЪЕКТОВ</div>
+                                <div class="char-list">
+                                    <div class="char-item">
+                                        <img src="icons/oil_pad.png" alt="" class="icon-small">
+                                        <span class="label">Нефтяные кусты</span>
+                                        <span class="value">3 <small>КП</small></span>
+                                    </div>
+                                    <div class="char-item">
+                                        <img src="icons/gas_pad.png" alt="" class="icon-small">
+                                        <span class="label">Газовые кусты</span>
+                                        <span class="value">11 <small>КП</small></span>
+                                    </div>
+                                    <div class="char-item">
+                                        <img src="icons/mixed_pad.png" alt="" class="icon-small">
+                                        <span class="label">Совмещенные кусты</span>
+                                        <span class="value">1 <small>КП</small></span>
+                                    </div>
+                                    <div class="char-divider"></div>
+                                    <div class="char-item">
+                                        <img src="icons/wells.png" alt="" class="icon-small">
+                                        <span class="label">Скважины</span>
+                                        <span class="value">17 / 47 <small>ШТ</small></span>
+                                    </div>
+                                    <div class="char-item">
+                                        <img src="icons/hcc.png" alt="" class="icon-small">
+                                        <span class="label">НСС</span>
+                                        <span class="value">31,2 <small>КМ</small></span>
+                                    </div>
+                                    <div class="char-item">
+                                        <img src="icons/gcc.png" alt="" class="icon-small">
+                                        <span class="label">ГСС</span>
+                                        <span class="value">83,0 <small>КМ</small></span>
+                                    </div>
+                                    <div class="char-item">
+                                        <img src="icons/methanol.png" alt="" class="icon-small">
+                                        <span class="label">Метанолопроводы</span>
+                                        <span class="value">83,0 <small>КМ</small></span>
+                                    </div>
+                                    <div class="char-divider"></div>
+                                    <div class="char-item">
+                                        <img src="icons/power.png" alt="" class="icon-small">
+                                        <span class="label">ВЭЦ на базе ГПЭС</span>
+                                        <span class="value">20 <small>МВт</small></span>
+                                    </div>
+                                    <div class="char-item">
+                                        <img src="icons/electric.png" alt="" class="icon-small">
+                                        <span class="label">ВЛ 10кВ</span>
+                                        <span class="value">99,3 <small>КМ</small></span>
+                                    </div>
+                                    <div class="char-item">
+                                        <img src="icons/road.png" alt="" class="icon-small">
+                                        <div class="label-group">
+                                            <span class="label">Автодороги:</span>
+                                            <span class="sub-label">Трасса / промысловые</span>
+                                        </div>
+                                        <span class="value">67 / 99,3 <small>КМ</small></span>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="opex-card">
-                                <div class="opex-header">OPEX</div>
-                                <div class="placeholder donut-placeholder"><img src="images/Opex.png" alt="">
+
+                            <div class="info-card transport-card">
+                                <h3>ПРИНЯТАЯ СХЕМА ТРАНСПОРТИРОВКИ ПРОДУКЦИИ:</h3>
+                                <div class="transport-item">
+                                    <img src="icons/truck.png" alt="" class="icon-medium">
+                                    <div class="transport-text">
+                                        <strong>ЖУВ</strong>
+                                        <span>Автомобильным транспортом → УПНГ ТЮ</span>
+                                    </div>
+                                </div>
+                                <div class="transport-item">
+                                    <img src="icons/pipe.png" alt="" class="icon-medium">
+                                    <div class="transport-text">
+                                        <strong>ГАЗ</strong>
+                                        <span>По ГВТ → УПНГ ТЮ</span>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="eco-files-btn">файлы</div>
-                    </div>
-                </div>
-            </div>
 
-            <div id="sub-pricing" class="sub-content hidden">
-                <div class="pricing-container">
-                    <h2 class="pricing-title">Проектно-сметная документация (Индексы)</h2>
-                    <table class="pricing-table">
-                        <thead>
-                            <tr>
-                                <th>Показатель</th>
-                                <th>Индекс</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>К СМР (строительно-монтажным)</td>
-                                <td>8,67</td>
-                            </tr>
-                            <tr>
-                                <td>К проектным работам (ПИР)</td>
-                                <td>25,41</td>
-                            </tr>
-                            <tr>
-                                <td>К пусконаладке</td>
-                                <td>9,82</td>
-                            </tr>
-                            <tr>
-                                <td>К прочим работам и затратам</td>
-                                <td>7,55</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-
-        </div>
-
-        <div id="tab-pir" class="tab-content hidden">
-            <div class="pir-layout">
-                <div class="pir-left">
-                    <div class="pir-header-info">
-                        <p><strong>Объект экспертизы:</strong> Обустройство и разработка нефтегазоконденсатного
-                            месторождения «Северное» (лицензионный участок ХМАО-Югра).</p>
-                        <p><strong>Заказчик:</strong> ООО «ГеоТек-Инвест».</p>
-                        <p><strong>Дата заключения:</strong> 15 марта 2026 г.</p>
-                        <p><strong>Экспертная организация:</strong> ООО «НефтеГазЭксперт».</p>
-                    </div>
-
-                    <div class="table-container">
-                        <table class="data-table blue-theme">
-                            <thead>
-                                <tr>
-                                    <th>Статус выполнения</th>
-                                    <th>Значение</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Согласование</td>
-                                    <td>—</td>
-                                </tr>
-                                <tr>
-                                    <td>Статус по ЗУРам</td>
-                                    <td>—</td>
-                                </tr>
-                                <tr>
-                                    <td>Статус по экспертизе</td>
-                                    <td>—</td>
-                                </tr>
-                                <tr>
-                                    <td>Статус по договорам</td>
-                                    <td>—</td>
-                                </tr>
-                                <tr>
-                                    <td>Сколько комплектов выдано</td>
-                                    <td>—</td>
-                                </tr>
-                                <tr>
-                                    <td>Проектный институт</td>
-                                    <td>—</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <div class="action-button blue-btn">комплект чертежей со статусом.</div>
-                    </div>
-                </div>
-
-                <div class="pir-right">
-                    <div class="file-upload-box">
-                        <div class="upload-area">Загрузите файл</div>
-                    </div>
-
-                    <div class="info-lists">
-                        <div class="info-group">
-                            <h4>● Виды изысканий</h4>
-                            <ul>
-                                <li>Инженерно-геодезические (% выполнения)</li>
-                                <li>Инженерно-геологические (% выполнения)</li>
-                                <li>Экологические изыскания (% выполнения)</li>
-                            </ul>
-                        </div>
-                        <div class="info-group">
-                            <h4>● Статус отчётов</h4>
-                            <ul>
-                                <li>Отчёт по инж. геологии (номер, дата утверждения)</li>
-                                <li>Отчёт по Гидрометеорологии</li>
-                                <li>Замечания госэкспертизы (количество)</li>
-                            </ul>
-                        </div>
-                        <div class="info-group">
-                            <h4>● Разрешительная документация</h4>
-                            <ul>
-                                <li>Акт выбора земельного участка</li>
-                                <li>Получение СЗЗ (санитарно-защитная зона)</li>
-                                <li>Согласование с Росприроднадзором</li>
-                            </ul>
-                        </div>
-                        <div class="info-group">
-                            <h4>● План-факт по ПИР</h4>
-                            <ul>
-                                <li>Плановая дата завершения полевых работ</li>
-                                <li>Фактическая дата завершения</li>
-                                <li>Причина отклонения</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div id="tab-safety" class="tab-content hidden">
-            <div class="safety-layout">
-                <h2 class="tab-header">5. Промышленная и экологическая безопасность</h2>
-
-                <div class="safety-grid">
-                    <div class="safety-metrics">
-                        <ul class="metrics-list">
-                            <li><strong>Класс опасности объекта:</strong> II (повышенная опасность).</li>
-                            <li><strong>Зона санитарной охраны:</strong> 500 м от ЦПС.</li>
-                            <li><strong>Плата за выбросы (проектная):</strong> 124 млн руб./год.</li>
-                            <li><strong>Риск аварийных разливов (расчётный):</strong> 4,2×10⁻⁵ (ниже нормативного).
-                            </li>
-                        </ul>
-
-                        <div class="action-button blue-btn excel-link">
-                            Обоснование промышленной безопасности (эксель)
-                        </div>
-                    </div>
-
-                    <div class="safety-visual">
-                        <div class="placeholder hazop-placeholder">
-                            <img src="images/Hazop.png" alt="HAZOP Study Table" style="max-width:100%;">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div id="tab-infrastructure" class="tab-content hidden">
-            <div class="submenu">
-                <div class="submenu-item active" onclick="switchSubTab('infra-main', this)">Обустройство и
-                    инфраструктура</div>
-                <div class="submenu-item" onclick="switchSubTab('infra-tech', this)">Технические решения</div>
-                <div class="submenu-item" onclick="switchSubTab('infra-risks', this)">Инжиниринговые риски</div>
-                <div class="submenu-item" onclick="switchSubTab('infra-kpi', this)">Удельные показатели</div>
-            </div>
-
-            <div id="sub-infra-main" class="sub-content">
-                <div class="metrics-row">
-                    <div class="metric-card">
-                        <strong>ЦПС</strong>
-                        <span>6 млн т/год</span>
-                    </div>
-                    <div class="metric-card">
-                        <strong>ДКС</strong>
-                        <span>18 МВт</span>
-                    </div>
-                    <div class="metric-card">
-                        <strong>ВЛ-110 кВ</strong>
-                        <span>46 км</span>
-                    </div>
-                    <div class="metric-card">
-                        <strong>Автодороги</strong>
-                        <span>28 км (IV кат.)</span>
-                    </div>
-                </div>
-                <div class="placeholder wide-map-placeholder">
-                    <img src="images/MapPlan.png" alt="">
-                </div>
-            </div>
-
-            <div id="sub-infra-tech" class="sub-content hidden">
-                <h2 class="sub-title">Ключевые параметры</h2>
-                <table class="data-table blue-theme tech-table">
-                    <thead>
-                        <tr>
-                            <th>Показатель</th>
-                            <th>Значение</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Тип платформы / установки</td>
-                            <td>Кустовая площадка закрытого типа</td>
-                        </tr>
-                        <tr>
-                            <td>Производительность по сырью (м³/сут)</td>
-                            <td>12 500</td>
-                        </tr>
-                        <tr>
-                            <td>Давление в системе (атм)</td>
-                            <td>160</td>
-                        </tr>
-                        <tr>
-                            <td>Используемые материалы (категория коррозионной стойкости)</td>
-                            <td>Нержавеющая сталь (С5-М)</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <div id="sub-infra-risks" class="sub-content hidden">
-                <div class="empty-state">
-                    <p>Данные по инжиниринговым рискам пока не загружены.</p>
-                </div>
-            </div>
-
-            <div id="sub-infra-kpi" class="sub-content hidden">
-                <h2 class="sub-title">Удельные показатели (Таблица)</h2>
-                <table class="data-table kpi-table">
-                    <thead>
-                        <tr>
-                            <th>Наименование показателя</th>
-                            <th>Ед. изм.</th>
-                            <th>Значение</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Удельные капитальные вложения на 1 т добычи</td>
-                            <td>тыс. руб. / т</td>
-                            <td>14,5</td>
-                        </tr>
-                        <tr>
-                            <td>Металлоемкость на скважину</td>
-                            <td>тонн</td>
-                            <td>320</td>
-                        </tr>
-                        <tr>
-                            <td>Удельный расход электроэнергии</td>
-                            <td>кВт⋅ч / м³</td>
-                            <td>12.4</td>
-                        </tr>
-                        <tr>
-                            <td>Удельные операционные затраты (OPEX)</td>
-                            <td>руб. / баррель</td>
-                            <td>850</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
-        <div id="tab-logistics" class="tab-content hidden">
-            <div class="submenu">
-                <div class="submenu-item active" onclick="switchSubTab('log-routes', this)">Маршруты</div>
-                <div class="submenu-item" onclick="switchSubTab('log-procurement', this)">Закупки</div>
-                <div class="submenu-item" onclick="switchSubTab('log-deliveries', this)">Поставки</div>
-                <div class="submenu-item" onclick="switchSubTab('log-inventory', this)">Складские запасы</div>
-                <div class="submenu-item" onclick="switchSubTab('log-customs', this)">Таможенное оформление</div>
-            </div>
-
-            <div id="sub-log-routes" class="sub-content">
-                <div class="placeholder wide-map-placeholder">
-                    <img src="images/Logistics.png" alt="">
-                </div>
-            </div>
-
-            <div id="sub-log-procurement" class="sub-content hidden">
-                <div class="procurement-layout">
-                    <div class="procurement-summary">
-                        <div class="metric-card">
-                            <strong>Всего закупок</strong>
-                            <span>145 позиций</span>
-                        </div>
-                        <div class="metric-card text-green">
-                            <strong>Законтрактовано</strong>
-                            <span>85%</span>
-                        </div>
-                    </div>
-
-                    <table class="data-table blue-theme procurement-table">
-                        <thead>
-                            <tr>
-                                <th>Номенклатура</th>
-                                <th>Статус</th>
-                                <th>Поставщик</th>
-                                <th>Срок поставки</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Трубы НКТ 73х5,5</td>
-                                <td><span class="status-badge green">Договор подписан</span></td>
-                                <td>ТМК</td>
-                                <td>12.05.2026</td>
-                            </tr>
-                            <tr>
-                                <td>Арматура фонтанная АФК</td>
-                                <td><span class="status-badge yellow">Тендер</span></td>
-                                <td>—</td>
-                                <td>—</td>
-                            </tr>
-                            <tr>
-                                <td>Кабель ВВГнг</td>
-                                <td><span class="status-badge green">Отгружено</span></td>
-                                <td>Камкабель</td>
-                                <td>20.04.2026</td>
-                            </tr>
-                            <tr>
-                                <td>Насосы ЦНС</td>
-                                <td><span class="status-badge red">Задержка</span></td>
-                                <td>Уралгидромаш</td>
-                                <td>15.06.2026</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-            <div id="sub-log-deliveries" class="sub-content hidden">
-                <div class="empty-state">Нет активных данных по поставкам.</div>
-            </div>
-
-            <div id="sub-log-inventory" class="sub-content hidden">
-                <div class="empty-state">Склады пусты.</div>
-            </div>
-
-            <div id="sub-log-customs" class="sub-content hidden">
-                <div class="empty-state">Таможенных деклараций в работе нет.</div>
-            </div>
-        </div>
-
-        <div id="tab-ksp" class="tab-content hidden">
-            <div class="submenu">
-                <div class="submenu-item active" onclick="switchSubTab('ksp-charts', this)">Графики</div>
-                <div class="submenu-item" onclick="switchSubTab('ksp-risks', this)">Риски</div>
-            </div>
-
-            <div id="sub-ksp-charts" class="sub-content">
-                <div class="ksp-charts-container">
-                    <div class="chart-block">
-                        <h3>Актуальный график</h3>
-                        <div class="placeholder img-placeholder">
-                            <img src="images/Chart1.png" alt="Актуальный график">
-                        </div>
-                    </div>
-
-                    <div class="chart-grid">
-                        <div class="chart-block">
-                            <h3>Версия от 27.02.2026</h3>
-                            <div class="placeholder img-placeholder">
-                                <img src="images/Chart2.png" alt="Версия 27.02">
-                            </div>
-                        </div>
-                        <div class="chart-block">
-                            <h3>Версия от 23.02.2026</h3>
-                            <div class="placeholder img-placeholder">
-                                <img src="images/Chart3.png" alt="Версия 23.02">
-                            </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div id="sub-ksp-risks" class="sub-content hidden">
-                <div class="risk-matrix-layout">
-                    <div class="risk-matrix-container">
-                        <table class="risk-matrix">
-                            <thead>
-                                <tr>
-                                    <th colspan="7" style="border:none; text-align:center; padding-bottom:10px;">
-                                        Вероятность</th>
-                                </tr>
-                                <tr>
-                                    <th>Очень низкая (1)</th>
-                                    <th>Низкая (2)</th>
-                                    <th>Средняя (3)</th>
-                                    <th>Высокая (4)</th>
-                                    <th>Очень высокая (5)</th>
-                                    <th style="border: none;"></th>
-                                    <th rowspan="6" class="vertical-text">Подверженность риску</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td class="bg-yellow">5</td>
-                                    <td class="bg-yellow">10</td>
-                                    <td class="bg-red">15</td>
-                                    <td class="bg-red">20</td>
-                                    <td class="bg-red">25</td>
-                                    <td class="row-label">Очень высокий уровень (5)</td>
-                                </tr>
-                                <tr>
-                                    <td class="bg-yellow">4</td>
-                                    <td class="bg-yellow">8</td>
-                                    <td class="bg-yellow">12</td>
-                                    <td class="bg-red">16</td>
-                                    <td class="bg-red">20</td>
-                                    <td class="row-label">Высокий уровень (4)</td>
-                                </tr>
-                                <tr>
-                                    <td class="bg-green">3</td>
-                                    <td class="bg-yellow">6</td>
-                                    <td class="bg-yellow">9</td>
-                                    <td class="bg-yellow">12</td>
-                                    <td class="bg-red">15</td>
-                                    <td class="row-label">Средний уровень (3)</td>
-                                </tr>
-                                <tr>
-                                    <td class="bg-green">2</td>
-                                    <td class="bg-green">4</td>
-                                    <td class="bg-yellow">6</td>
-                                    <td class="bg-yellow">8</td>
-                                    <td class="bg-yellow">10</td>
-                                    <td class="row-label">Низкий уровень (2)</td>
-                                </tr>
-                                <tr>
-                                    <td class="bg-green">1</td>
-                                    <td class="bg-green">2</td>
-                                    <td class="bg-green">3</td>
-                                    <td class="bg-yellow">4</td>
-                                    <td class="bg-yellow">5</td>
-                                    <td class="row-label">Очень низкий уровень (1)</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-
-                    <table class="data-table blue-theme risk-list-table">
-                        <thead>
-                            <tr>
-                                <th style="width: 70%;">Риск</th>
-                                <th>Вероятность</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Задержка поставки МТР</td>
-                                <td>Средняя</td>
-                            </tr>
-                            <tr>
-                                <td>Климатические условия (шторм)</td>
-                                <td>Высокая</td>
-                            </tr>
-                            <tr>
-                                <td>Технический сбой оборудования</td>
-                                <td>Низкая</td>
-                            </tr>
-                            <tr>
-                                <td>Изменение проектных решений</td>
-                                <td>Средняя</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+            <div id="content-geology" class="tab-panel" style="display: none;">
+                <h2>Геология и бурение</h2>
             </div>
-        </div>
-
-        <div class="back-button-container">
-            <button class="btn-back" onclick="backToProjects()">⬅ Назад к выбору проекта</button>
-        </div>
-
+        </main>
     </div>
 
-    <div id="image-modal" class="modal hidden">
-        <span class="modal-close" onclick="closeModal()">&times;</span>
-        <img class="modal-content" id="modal-img" alt="Увеличенное изображение">
-    </div>
+
 
     <script src="script.js"></script>
 </body>
